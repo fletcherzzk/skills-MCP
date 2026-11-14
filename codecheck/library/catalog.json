@@ -1,0 +1,72 @@
+{
+  "library": "functional-cpp-library",
+  "language": "C++17",
+  "description": "Read-only reference implementations for a Codex MCP lookup tool.",
+  "functions": {
+    "map": {
+      "description": "Apply a pure function to every element, preserving order.",
+      "return_type": "std::vector<R>",
+      "implementations": {
+        "parallel_stl": {
+          "path": "map/parallel_stl.hpp",
+          "symbol": "functional_cpp::parallel_map",
+          "requires": "C++17; default-constructible/assignable result; thread-safe pure callable",
+          "input_modified": false,
+          "work": "O(n)"
+        }
+      }
+    },
+    "tabulate": {
+      "description": "Generate n elements by applying f(i) to indices 0..n-1.",
+      "return_type": "std::vector<R>",
+      "implementations": {
+        "parallel_stl": {
+          "path": "tabulate/parallel_stl.hpp",
+          "symbol": "functional_cpp::parallel_tabulate",
+          "requires": "C++17; default-constructible/assignable result; thread-safe pure callable",
+          "input_modified": false,
+          "work": "O(n)"
+        }
+      }
+    },
+    "reduce": {
+      "description": "Combine elements and an identity with a parallel reduction.",
+      "return_type": "T",
+      "implementations": {
+        "parallel_stl": {
+          "path": "reduce/parallel_stl.hpp",
+          "symbol": "functional_cpp::parallel_reduce",
+          "requires": "C++17; associative and commutative op, valid identity; pure callable",
+          "input_modified": false,
+          "work": "O(n)"
+        }
+      }
+    },
+    "filter": {
+      "description": "Select matching elements and retain their input order.",
+      "return_type": "std::vector<T>",
+      "implementations": {
+        "parallel_stl": {
+          "path": "filter/parallel_stl.hpp",
+          "symbol": "functional_cpp::parallel_filter",
+          "requires": "C++17; default-constructible/copyable/assignable T; pure predicate",
+          "input_modified": false,
+          "work": "O(n)"
+        }
+      }
+    },
+    "sort": {
+      "description": "Return a sorted copy using a parallel sorting algorithm.",
+      "return_type": "std::vector<T>",
+      "implementations": {
+        "parallel_stl": {
+          "path": "sort/parallel_stl.hpp",
+          "symbol": "functional_cpp::parallel_sort",
+          "requires": "C++17; pure strict-weak-order comparator; sort is not stable",
+          "input_modified": false,
+          "work": "O(n log n) comparisons"
+        }
+      }
+    }
+  }
+}

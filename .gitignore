@@ -1,0 +1,58 @@
+# Local Python environments and installed dependencies
+.venv/
+venv/
+env/
+__pypackages__/
+
+# Python bytecode, caches, and generated packaging files
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.uv-cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local secrets (keep example configuration files shareable)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Editor settings, extension state, and temporary files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.log
+
+# Generated C++ binaries and compiler output; keep all C++ sources
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.pdb
+*.ilk
+*.out
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Keep codecheck.py, library/, pyproject.toml, uv.lock, .python-version,
+# project documentation, and skill sources under version control.
