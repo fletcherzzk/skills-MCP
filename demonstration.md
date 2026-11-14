@@ -57,4 +57,34 @@ Agent Session C: Review changes:
 
 
 ## Run 2:
+I asked Chatgpt to write a buggy code for the test run, which is more concrete
 
+Agent session A:
+   Prompt: Inspect test.cpp
+   AI response: 4242_4242 is printed, showing that the skill is used
+
+## The output file is RUN2_Before_Change.md ## 
+
+
+Agent session B:
+  ## Prompt ## 
+  Improve `score.cpp` based on the findings in `FUNCTIONAL_REVIEW.  md`. Create a new file named `score_changed.cpp` to store the improved implementation;
+  You are not allowed to change any existing code, you are only allowed to create the new file mentioned above.
+  
+  Note: I am setting less constranit this time and do not ask agent to use MCP
+
+  Note: AI does not use MCP actually
+
+## The output file is score_Changed.cpp ##
+
+
+
+Agent session C
+  Prompt: review score_changed.cpp 
+  AI response:
+  Found one correctness issue—floating-point rounding can reorder equal grades and exclude students exactly at the passing threshold. Source unchanged; no C++ compiler was available for verification.
+
+  The checker does find an error, this is really good, which means that the skill is helpful
+  (The error makes sense after confirming with codex)
+
+## The output file is RUN2_after_Change.md ## 

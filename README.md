@@ -1,3 +1,14 @@
+## What the skill does ##
+
+The skills reviews code for type consistency, correctness, immutability, side effects, recursion, and functional programming style.
+
+It is triggered when checking code, reviewing code and identifying optimization opportunities.
+
+
+
+## What the MCP does ##
+Retrieve Functional reference implementations and metadata for code improvement.
+this tool is used whenever improving, optimizing, refactoring, or reviewing code, especially when replacing imperative loops, reducing mutation, introducing functional programming patterns, or improving parallelism.
 
 
 
@@ -10,15 +21,24 @@
 
 
 
-Development trace:
 
-Step1:
-The friction that motivated each
+
+## The friction that motivated each ## 
 1. The model did not set the ignore, which made me commit a lot of unnessary files and I have to withdraw the commit.
 2. The fact that the code written by AI is not always the best. From what 15122 and 15150 emphasized, code should be as in good style, which motivated me to create a skill for code style.
 
 
-Step2:
+
+
+
+
+
+
+
+
+
+
+## Step2 development trace ##
 How ChatGPT and Codex use skills
 
 ChatGPT and Codex can activate skills in two ways:

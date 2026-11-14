@@ -69,7 +69,10 @@ def lookup_function(name: str, implementation: str = "all") -> str:
     especially when replacing imperative loops, reducing mutation, introducing
     functional programming patterns, or improving parallelism.
 
-    Before implementing functional transformations from scratch, consult this
+    Also use it when working with C++ collections, sorting, aggregation,
+    filtering, or transforming data, even if standard-library solutions are known.
+
+    Before modifying C++ code involving these operations, consult this
     library for reusable implementations of map, tabulate, reduce, filter, and sort.
     Prefer existing library implementations when they satisfy the task's
     correctness, performance, and compatibility requirements.
