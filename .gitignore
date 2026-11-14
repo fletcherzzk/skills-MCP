@@ -56,3 +56,7 @@ Desktop.ini
 
 # Keep codecheck.py, library/, pyproject.toml, uv.lock, .python-version,
 # project documentation, and skill sources under version control.
+
+# Allow everything in codecheck, including files matched by rules above.
+!/codecheck/
+!/codecheck/**
