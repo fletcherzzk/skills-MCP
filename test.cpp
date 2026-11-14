@@ -1,59 +1,58 @@
-#pragma once
 
-#include <stdexcept>
-#include <utility>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
-#include "parallel.h"
+// Generate squares of even numbers.
+std::vector<int> even_squares(const std::vector<int>& nums) {
+    std::vector<int> result;
 
-using par::sequence;
+    for (std::size_t i = 0; i <= nums.size(); i++) {
+        if (nums[i] % 2 == 0) {
+            result.push_back(nums[i] * nums[i]);
+        }
+    }
 
-
-// Do not modify these structs!
-struct building {
-  int l, h, r;
-};
-
-struct coord {
-  int x, y;
-};
-
-sequence<coord> auto singleton(const building& b) {
-  return par::array_sequence<coord>{coord{b.l, b.h}, coord{b.r, 0}};
+    std::sort(result.begin(), result.end());
+    return result;
 }
 
+// Calculate the sum recursively.
+int recursive_sum(const std::vector<int>& nums, std::size_t i = 0) {
+    if (i == nums.size()) {
+        return 0;
+    }
 
-sequence<coord> auto combine(const sequence<coord> auto& s1, const sequence<coord> auto& s2) {
-  auto&& s2_mapped = par::map(s2,[&](auto&& a){return coord{a.x,-1};});
-  auto&& s1_merged = par::merge(s1,s2_mapped,[&](auto&& a,auto&& b){return a.x < b.x;});
-  auto&& s1_height = par::map(s1_merged,[&](auto&& a){return a.y;});
-  auto&& s1_added = par::scan_inclusive(s1_height, -1, 
-                                       [&](auto&& a, auto&& b){
-                                           if(b != -1) return b;
-                                           else return a;
-                                       });
-  //propagate height with copy right
+    return nums[i] + recursive_sum(nums, i + 1);
+}
 
-  auto&& s1_mapped = par::map(s1,[&](auto&& a){return coord{a.x,-1};});
-  auto&& s2_merged = par::merge(s2,s1_mapped,[&](auto&& a,auto&& b){return a.x < b.x;});
-  auto&& s2_height = par::map(s2_merged,[&](auto&& a){return a.y;});
-  auto&& s2_added = par::scan_inclusive(s2_height, -1, 
-                                       [&](auto&& a, auto&& b){
-                                           if(b != -1) return b;
-                                           else return a;
-                                       });
+// Generate a sequence of indices.
+std::vector<int> make_indices(int n) {
+    std::vector<int> result;
 
-  auto&& merged = 
-        par::tabulate(s1_merged.size(),
-                      [&](auto i){
-                      return coord{s1_merged[i].x,std::ranges::max(s1_added[i],s2_added[i])};
-                      });
+    for (int i = 0; i < n; i++) {
+        result.push_back(i);
+    }
 
-  auto&& res = 
-        par::filter_idx(merged,
-                        [&](size_t i, auto e){
-                          if(i==0) return true;
-                          else return (e.y != merged[i-1].y);
-                        });
-  
-  return res;
+    return result;
+}
+
+int main() {
+    const std::vector<int> nums = {5, 2, 4, 1, 6};
+
+    auto squares = even_squares(nums);
+    int total = recursive_sum(squares);
+    auto indices = make_indices(5);
+
+    std::cout << "Sum: " << total << "\n";
+
+    for (int x : squares) {
+        std::cout << x << " ";
+    }
+    std::cout << "\n";
+
+    for (int i : indices) {
+        std::cout << i << " ";
+    }
+    std::cout << "\n";
 }

@@ -1,4 +1,17 @@
 
+
+
+
+
+
+
+
+
+
+
+
+Development trace:
+
 Step1:
 The friction that motivated each
 1. The model did not set the ignore, which made me commit a lot of unnessary files and I have to withdraw the commit.
@@ -16,9 +29,7 @@ Implicit invocation: ChatGPT or Codex can choose a skill when your task matches 
 I am going to use explict invocation, to make sure the skill is used by the agent.
 
 
-Step3:
-finished, problems see iteration
+Step3-9: see other files
 
 
-Step4:
-finished
+
