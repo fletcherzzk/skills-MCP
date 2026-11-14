@@ -1,6 +1,6 @@
 ---
 name: code-style-check
-description: Review code for type consistency, correctness, immutability, side effects, recursion, and functional programming style. Use when reviewing code and identifying optimization opportunities.
+description: Review code for type consistency, correctness, immutability, side effects, recursion, and functional programming style. Use when checking code, reviewing code and identifying optimization opportunities.
 ---
 
 
