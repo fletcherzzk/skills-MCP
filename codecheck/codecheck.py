@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from mcp.server import MCPServer
+from mcp.types import ToolAnnotations
 
 logger = logging.getLogger(__name__)
 mcp = MCPServer("functional-cpp-library")
@@ -53,26 +54,39 @@ def _load_catalog() -> dict[str, Any]:
     return catalog
 
 
-@mcp.tool()
+@mcp.tool(
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False,
+    )
+)
 def lookup_function(name: str, implementation: str = "all") -> str:
-    """Retrieve actual Functional C++ reference implementations and catalog metadata.
+    """Retrieve Functional reference implementations and metadata for code improvement.
 
-    Use this tool when an agent needs reliable reference implementations for
-    functional C++ programming, including map, tabulate, reduce, filter, and sort.
-    Supported function names and implementation variants come from catalog.json.
-    This read-only tool never generates, compiles, or executes C++ code.
+    Use this tool whenever improving, optimizing, refactoring, or reviewing code,
+    especially when replacing imperative loops, reducing mutation, introducing
+    functional programming patterns, or improving parallelism.
+
+    Before implementing functional transformations from scratch, consult this
+    library for reusable implementations of map, tabulate, reduce, filter, and sort.
+    Prefer existing library implementations when they satisfy the task's
+    correctness, performance, and compatibility requirements.
+
+    Supported functions and implementation variants are defined in catalog.json.
+    This read-only tool retrieves existing C++ source code and metadata without
+    generating, compiling, executing, or modifying code.
 
     Args:
         name: Exact function name registered in the library catalog.
-        implementation: Exact catalog variant name, or "all" (the default) to
-            retrieve every available implementation variant for the function.
+        implementation: Exact implementation variant name, or "all" (default)
+            to retrieve all available variants.
 
     Returns:
-        A JSON string containing library, function, and implementation metadata
-        plus source_code for each requested variant, or a helpful error string.
-        Source text is preserved exactly, including line endings, in the decoded
-        JSON source_code values. Missing metadata is omitted; signatures and
-        additional restrictions may be present in the source itself.
+        A JSON string containing function metadata, available implementations,
+        and actual C++ source code, or a descriptive error message.
+        Missing metadata is omitted, and source code is returned unchanged.
     """
     if not isinstance(name, str) or not name.strip():
         return "Error: name must be a nonempty string."
